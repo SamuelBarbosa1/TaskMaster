@@ -35,19 +35,21 @@ TaskMaster é um aplicativo móvel desenvolvido em React Native que permite aos 
 ## 📲 Instalação
 
 1. Clone o repositório:
+````
 bash
 git clone https://github.com/seu-usuario/taskmaster.git
-
-2. Instale as dependências:
+````
+3. Instale as dependências:
+````
 bash
 cd taskmaster
 npm install
-
-
-3. Inicie o projeto:
+````
+5. Inicie o projeto:
+````
 bash
 expo start
-
+````
 
 ## 🔧 Configuração
 
@@ -58,6 +60,7 @@ expo start
 - Um dispositivo móvel ou emulador
 
 ### Dependências Principais
+````
 json
 {
 "expo": "~49.0.0",
@@ -67,7 +70,7 @@ json
 "@react-native-async-storage/async-storage": "^1.18.0",
 "@react-native-community/netinfo": "^9.0.0"
 }
-
+````
 ## 🎨 Temas
 
 O aplicativo suporta dois temas:
