@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, Alert, Switch } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Alert, Switch, StyleSheet } from 'react-native';
 import { registerUser, loadData, saveData } from '../services/storage';
-import styles from '../styles/loginStyles';
 import { useTheme } from '../context/ThemeContext';
 
 const RegisterScreen = ({ navigation, onRegister }) => {
@@ -47,29 +46,48 @@ const RegisterScreen = ({ navigation, onRegister }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={styles.title}>Cadastro</Text>
+      <Text style={[styles.title, { color: theme.text }]}>Cadastro</Text>
+      
       <TextInput
-        style={styles.input}
+        style={[styles.input, { 
+          backgroundColor: theme.card,
+          color: theme.text,
+          borderColor: theme.border 
+        }]}
         placeholder="Email"
+        placeholderTextColor={theme.textSecondary}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
       />
+      
       <TextInput
-        style={styles.input}
+        style={[styles.input, { 
+          backgroundColor: theme.card,
+          color: theme.text,
+          borderColor: theme.border 
+        }]}
         placeholder="Nome de usuário"
+        placeholderTextColor={theme.textSecondary}
         value={username}
         onChangeText={setUsername}
         autoCapitalize="words"
       />
+      
       <TextInput
-        style={styles.input}
+        style={[styles.input, { 
+          backgroundColor: theme.card,
+          color: theme.text,
+          borderColor: theme.border 
+        }]}
         placeholder="Senha"
+        placeholderTextColor={theme.textSecondary}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
+
       <View style={styles.optionsContainer}>
         <View style={styles.optionRow}>
           <Switch
@@ -91,14 +109,74 @@ const RegisterScreen = ({ navigation, onRegister }) => {
           <Text style={[styles.optionText, { color: theme.text }]}>Login automático</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Cadastrar</Text>
+
+      <TouchableOpacity 
+        style={[styles.button, { backgroundColor: theme.primary }]}
+        onPress={handleRegister}
+      >
+        <Text style={[styles.buttonText, { color: theme.white }]}>Cadastrar</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.toggleText}>Já tenho conta</Text>
+
+      <TouchableOpacity 
+        style={styles.loginLink}
+        onPress={() => navigation.navigate('Login')}
+      >
+        <Text style={[styles.loginText, { color: theme.primary }]}>
+          Já tenho conta
+        </Text>
       </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  input: {
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+    borderWidth: 1,
+    fontSize: 16,
+  },
+  optionsContainer: {
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  optionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  optionText: {
+    marginLeft: 10,
+    fontSize: 16,
+  },
+  button: {
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  loginLink: {
+    alignItems: 'center',
+  },
+  loginText: {
+    fontSize: 16,
+  },
+});
 
 export default RegisterScreen; 
