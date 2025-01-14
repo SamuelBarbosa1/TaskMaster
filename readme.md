@@ -37,7 +37,7 @@ TaskMaster é um aplicativo móvel desenvolvido em React Native que permite aos 
 1. Clone o repositório:
 ````
 bash
-git clone https://github.com/seu-usuario/taskmaster.git
+git clone https://github.com/SamuelBarbosa1/TaskMaster
 ````
 3. Instale as dependências:
 ````
@@ -105,9 +105,9 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 📞 Contato
 
-[Seu Nome] - [@seutwitter](https://twitter.com/seutwitter) - email@exemplo.com
+[Samuel] - samuelbarbosa2001oliveira@gmail.com
 
-Link do Projeto: [https://github.com/seu-usuario/taskmaster](https://github.com/seu-usuario/taskmaster)
+Link do Projeto: [taskmaster](https://github.com/SamuelBarbosa1/TaskMaster)
 
 ## 🙏 Agradecimentos
 
@@ -117,4 +117,4 @@ Link do Projeto: [https://github.com/seu-usuario/taskmaster](https://github.com/
 - [Todos os contribuidores](https://github.com/seu-usuario/taskmaster/contributors)
 
 ---
-⌨️ com ❤️ por [Seu Nome](https://github.com/seu-usuario) 😊
+⌨️ com ❤️ por [Samuel](https://github.com/SamuelBarbosa1) 😊
