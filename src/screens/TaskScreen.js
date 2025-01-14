@@ -9,12 +9,17 @@ import {
   Alert,
   Modal,
   Animated,
+  RefreshControl,
 } from 'react-native';
 import { loadData, saveData, clearAllData } from '../services/storage';
 import TaskItem from '../components/TaskItem';
 import styles from '../styles/taskScreenStyles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../context/ThemeContext';
+import SwipeableTaskItem from '../components/SwipeableTaskItem';
+import { showToast } from '../components/Toast';
+import { useConnection } from '../context/ConnectionContext';
+import ConnectionStatus from '../components/ConnectionStatus';
 
 const saveToHistory = async (task, action) => {
   try {
@@ -58,6 +63,8 @@ const TaskScreen = ({ route }) => {
   const [selectedPriority, setSelectedPriority] = useState('média');
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [modalAnimation] = useState(new Animated.Value(0));
+  const [refreshing, setRefreshing] = useState(false);
+  const { isConnected, addPendingSync } = useConnection();
 
   useEffect(() => {
     loadTasks();
@@ -85,11 +92,18 @@ const TaskScreen = ({ route }) => {
       createdAt: new Date().toISOString(),
     };
 
-    const updatedTasks = [...tasks, newTaskItem];
     try {
+      const updatedTasks = [...tasks, newTaskItem];
       await saveData('tasks', updatedTasks);
       setTasks(updatedTasks);
       setNewTask('');
+
+      if (!isConnected) {
+        addPendingSync({
+          type: 'ADD_TASK',
+          data: newTaskItem
+        });
+      }
     } catch (error) {
       Alert.alert('Erro', 'Erro ao adicionar tarefa');
     }
@@ -122,13 +136,22 @@ const TaskScreen = ({ route }) => {
     try {
       const taskToComplete = tasks.find(task => task.id === taskId);
       if (taskToComplete) {
-        // Salva no histórico
-        await saveToHistory({ ...taskToComplete, completed: true }, 'completed');
+        const completedTask = {
+          ...taskToComplete,
+          completed: true,
+          completedAt: new Date().toISOString()
+        };
+
+        await saveToHistory(completedTask, 'completed');
         
-        // Remove a tarefa da lista
         const updatedTasks = tasks.filter(task => task.id !== taskId);
         await saveData('tasks', updatedTasks);
         setTasks(updatedTasks);
+
+        const streak = parseInt(await loadData('streak') || '0');
+        await saveData('streak', streak + 1);
+
+        showToast('success', 'Tarefa concluída', 'A tarefa foi marcada como concluída');
       }
     } catch (error) {
       Alert.alert('Erro', 'Erro ao completar tarefa');
@@ -199,8 +222,28 @@ const TaskScreen = ({ route }) => {
     }).start(() => setIsDeleteModalVisible(false));
   };
 
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    await loadTasks();
+    setRefreshing(false);
+  }, []);
+
+  const handleDeleteTask = async (taskId) => {
+    try {
+      const taskToDelete = tasks.find(task => task.id === taskId);
+      await saveToHistory(taskToDelete, 'deleted');
+      const updatedTasks = tasks.filter(task => task.id !== taskId);
+      await saveData('tasks', updatedTasks);
+      setTasks(updatedTasks);
+      showToast('success', 'Tarefa excluída', 'A tarefa foi removida com sucesso');
+    } catch (error) {
+      showToast('error', 'Erro', 'Não foi possível excluir a tarefa');
+    }
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <ConnectionStatus />
       <View style={[styles.welcomeContainer, { backgroundColor: theme.card }]}>
         <Text style={[styles.welcomeText, { color: theme.text }]}>
           Olá, {user.username}
@@ -253,10 +296,18 @@ const TaskScreen = ({ route }) => {
       <FlatList
         data={tasks}
         keyExtractor={(item) => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={theme.primary}
+          />
+        }
         renderItem={({ item }) => (
-          <TaskItem 
+          <SwipeableTaskItem
             task={item}
-            onToggleComplete={toggleTaskComplete}
+            onComplete={() => toggleTaskComplete(item.id)}
+            onDelete={() => handleDeleteTask(item.id)}
             onEdit={editTask}
           />
         )}

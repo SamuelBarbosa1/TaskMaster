@@ -8,6 +8,12 @@ const TaskItem = ({ task, onToggleComplete, onEdit }) => {
   const [editedText, setEditedText] = useState(task.text);
   const { theme } = useTheme();
 
+  const handleToggleComplete = () => {
+    if (onToggleComplete) {
+      onToggleComplete();
+    }
+  };
+
   const handleSaveEdit = () => {
     onEdit(task.id, editedText);
     setIsEditing(false);
@@ -21,7 +27,7 @@ const TaskItem = ({ task, onToggleComplete, onEdit }) => {
     ]}>
       <TouchableOpacity 
         style={[styles.checkbox, { borderColor: theme.primary }]}
-        onPress={() => onToggleComplete(task.id)}
+        onPress={handleToggleComplete}
       >
         {task.completed && (
           <View style={[styles.checked, { backgroundColor: theme.primary }]} />

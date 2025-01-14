@@ -76,4 +76,35 @@ export const loginUser = async (email, password) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const saveToHistory = async (task, action) => {
+  try {
+    const history = await loadData('taskHistory') || {};
+    const date = new Date().toISOString().split('T')[0];
+    
+    if (!history[date]) {
+      history[date] = [];
+    }
+
+    const existingTaskIndex = history[date].findIndex(t => t.id === task.id);
+    
+    if (existingTaskIndex >= 0) {
+      history[date][existingTaskIndex] = {
+        ...task,
+        [action]: true,
+        updatedAt: new Date().toISOString()
+      };
+    } else {
+      history[date].push({
+        ...task,
+        [action]: true,
+        completedAt: new Date().toISOString()
+      });
+    }
+
+    await saveData('taskHistory', history);
+  } catch (error) {
+    console.error('Erro ao salvar no histórico:', error);
+  }
 }; 

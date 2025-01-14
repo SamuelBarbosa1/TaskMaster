@@ -14,6 +14,11 @@ import ProfileScreen from './screens/ProfileScreen';
 import colors from './styles/colors';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { useColorScheme } from './hooks/useColorScheme';
+import Toast from 'react-native-toast-message';
+import { toastConfig } from './components/Toast';
+import StatsScreen from './screens/StatsScreen';
+import { ConnectionProvider } from './context/ConnectionContext';
+import { OfflineProvider } from './context/OfflineContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,6 +67,15 @@ const TabNavigator = ({ user, onLogout }) => {
           ),
         }}
       />
+      <Tab.Screen
+        name="Estatísticas"
+        component={StatsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="insert-chart" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -87,24 +101,29 @@ const App = () => {
 
   return (
     <ThemeProvider key={colorScheme}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {!user ? (
-            <>
-              <Stack.Screen name="Login">
-                {props => <LoginScreen {...props} onLogin={setUser} />}
-              </Stack.Screen>
-              <Stack.Screen name="Register">
-                {props => <RegisterScreen {...props} onRegister={setUser} />}
-              </Stack.Screen>
-            </>
-          ) : (
-            <Stack.Screen name="MainApp">
-              {props => <TabNavigator {...props} user={user} onLogout={() => setUser(null)} />}
-            </Stack.Screen>
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
+      <OfflineProvider>
+        <ConnectionProvider>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              {!user ? (
+                <>
+                  <Stack.Screen name="Login">
+                    {props => <LoginScreen {...props} onLogin={setUser} />}
+                  </Stack.Screen>
+                  <Stack.Screen name="Register">
+                    {props => <RegisterScreen {...props} onRegister={setUser} />}
+                  </Stack.Screen>
+                </>
+              ) : (
+                <Stack.Screen name="MainApp">
+                  {props => <TabNavigator {...props} user={user} onLogout={() => setUser(null)} />}
+                </Stack.Screen>
+              )}
+            </Stack.Navigator>
+          </NavigationContainer>
+        </ConnectionProvider>
+      </OfflineProvider>
+      <Toast config={toastConfig} />
     </ThemeProvider>
   );
 };

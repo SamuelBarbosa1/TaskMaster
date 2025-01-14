@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, Alert, Switch, StyleSheet } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, TextInput, TouchableOpacity, Text, Alert, Switch, StyleSheet, Animated } from 'react-native';
 import { registerUser, loadData, saveData } from '../services/storage';
 import { useTheme } from '../context/ThemeContext';
+import OnboardingTutorial from '../components/OnboardingTutorial';
 
 const RegisterScreen = ({ navigation, onRegister }) => {
   const { theme } = useTheme();
@@ -10,6 +11,12 @@ const RegisterScreen = ({ navigation, onRegister }) => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [autoLogin, setAutoLogin] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [newUserData, setNewUserData] = useState(null);
+  
+  // Adicionar animações
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+  const tutorialFade = useRef(new Animated.Value(0)).current;
 
   const handleRegister = async () => {
     if (!email.trim() || !password.trim() || !username.trim()) {
@@ -28,7 +35,6 @@ const RegisterScreen = ({ navigation, onRegister }) => {
       const newUser = { username, email, password };
       await saveData('users', [...users, newUser]);
 
-      // Salva as preferências do usuário
       if (rememberMe) {
         await saveData('rememberedUser', { email, password });
       }
@@ -38,14 +44,52 @@ const RegisterScreen = ({ navigation, onRegister }) => {
       }
 
       await saveData('currentUser', newUser);
-      onRegister(newUser);
+      setNewUserData(newUser);
+
+      // Animar a transição
+      Animated.sequence([
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(tutorialFade, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        setShowTutorial(true);
+      });
+
     } catch (error) {
       Alert.alert('Erro', 'Erro ao cadastrar usuário');
     }
   };
 
+  if (showTutorial) {
+    return (
+      <Animated.View style={[styles.container, { opacity: tutorialFade }]}>
+        <OnboardingTutorial
+          onComplete={async () => {
+            await saveData('tutorialCompleted', true);
+            onRegister(newUserData);
+          }}
+        />
+      </Animated.View>
+    );
+  }
+
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <Animated.View 
+      style={[
+        styles.container, 
+        { 
+          backgroundColor: theme.background,
+          opacity: fadeAnim 
+        }
+      ]}
+    >
       <Text style={[styles.title, { color: theme.text }]}>Cadastro</Text>
       
       <TextInput
@@ -125,7 +169,7 @@ const RegisterScreen = ({ navigation, onRegister }) => {
           Já tenho conta
         </Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 

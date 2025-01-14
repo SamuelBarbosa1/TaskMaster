@@ -21,7 +21,6 @@ const ProfileScreen = ({ route }) => {
   const { user, onLogout } = route.params;
   const { theme } = useTheme();
   const [profileImage, setProfileImage] = useState(null);
-  const [dailyGoal, setDailyGoal] = useState('');
   const [stats, setStats] = useState({
     totalTasks: 0,
     completedTasks: 0,
@@ -51,7 +50,6 @@ const ProfileScreen = ({ route }) => {
       const profileData = await loadData(`profile_${user.email}`);
       if (profileData) {
         setProfileImage(profileData.image);
-        setDailyGoal(profileData.dailyGoal);
         setBio(profileData.bio || '');
       }
     } catch (error) {
@@ -132,10 +130,6 @@ const ProfileScreen = ({ route }) => {
   const handleSaveBio = async () => {
     await saveProfileData({ bio });
     setIsEditingBio(false);
-  };
-
-  const handleSaveGoal = async () => {
-    await saveProfileData({ dailyGoal });
   };
 
   const handleLogout = async () => {
@@ -240,31 +234,6 @@ const ProfileScreen = ({ route }) => {
             </Text>
           </TouchableOpacity>
         )}
-      </View>
-
-      <View style={[styles.section, { backgroundColor: theme.card }]}>
-        <Text style={[styles.sectionTitle, { color: theme.text }]}>Meta Diária</Text>
-        <View style={styles.goalContainer}>
-          <TextInput
-            style={[styles.goalInput, { 
-              backgroundColor: theme.background,
-              color: theme.text,
-              borderColor: theme.border,
-              borderWidth: 1,
-            }]}
-            value={dailyGoal}
-            onChangeText={setDailyGoal}
-            placeholder="Definir meta diária de tarefas"
-            placeholderTextColor={theme.textSecondary}
-            keyboardType="numeric"
-          />
-          <TouchableOpacity 
-            style={[styles.goalSaveButton, { backgroundColor: theme.primary }]}
-            onPress={handleSaveGoal}
-          >
-            <Icon name="check" size={24} color={theme.white} />
-          </TouchableOpacity>
-        </View>
       </View>
 
       <View style={[styles.section, { backgroundColor: theme.card }]}>
