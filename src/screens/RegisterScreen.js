@@ -90,7 +90,7 @@ const RegisterScreen = ({ navigation, onRegister }) => {
         }
       ]}
     >
-      <Text style={[styles.title, { color: theme.text }]}>Cadastro</Text>
+      <Text style={[styles.title, { color: theme.text }]}>Criar uma conta</Text>
       
       <TextInput
         style={[styles.input, { 
@@ -140,7 +140,7 @@ const RegisterScreen = ({ navigation, onRegister }) => {
             trackColor={{ false: theme.border, true: theme.primary }}
             thumbColor={theme.card}
           />
-          <Text style={[styles.optionText, { color: theme.text }]}>Lembrar-me</Text>
+          <Text style={[styles.optionText, { color: theme.text }]}>Matanhe-me conectado</Text>
         </View>
 
         <View style={styles.optionRow}>
@@ -158,7 +158,7 @@ const RegisterScreen = ({ navigation, onRegister }) => {
         style={[styles.button, { backgroundColor: theme.primary }]}
         onPress={handleRegister}
       >
-        <Text style={[styles.buttonText, { color: theme.white }]}>Cadastrar</Text>
+        <Text style={[styles.buttonText, { color: theme.white }]}>Criar conta</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 

@@ -16,7 +16,7 @@ export const ConnectionProvider = ({ children }) => {
         setIsConnected(newConnectionState);
         if (newConnectionState) {
           showToast('success', 'Online', 'Conexão restaurada');
-          syncPendingChanges();
+          syncPendingChanges();q
         } else {
           showToast('info', 'Offline', 'Modo offline ativado');
         }

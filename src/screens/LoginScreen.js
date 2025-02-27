@@ -82,7 +82,7 @@ const LoginScreen = ({ navigation, onLogin }) => {
           color: theme.text,
           borderColor: theme.border 
         }]}
-        placeholder="Email"
+        placeholder="Entrar com seu email"
         placeholderTextColor={theme.textSecondary}
         value={email}
         onChangeText={setEmail}
@@ -95,7 +95,7 @@ const LoginScreen = ({ navigation, onLogin }) => {
           color: theme.text,
           borderColor: theme.border 
         }]}
-        placeholder="Senha"
+        placeholder="Entrar com sua senha"
         placeholderTextColor={theme.textSecondary}
         value={password}
         onChangeText={setPassword}
@@ -110,7 +110,7 @@ const LoginScreen = ({ navigation, onLogin }) => {
             trackColor={{ false: theme.border, true: theme.primary }}
             thumbColor={theme.card}
           />
-          <Text style={[styles.optionText, { color: theme.text }]}>Lembrar-me</Text>
+          <Text style={[styles.optionText, { color: theme.text }]}>Mantenha-me conectado</Text>
         </View>
 
         <View style={styles.optionRow}>
@@ -136,7 +136,7 @@ const LoginScreen = ({ navigation, onLogin }) => {
         onPress={() => navigation.navigate('Register')}
       >
         <Text style={[styles.registerText, { color: theme.primary }]}>
-          Não tem uma conta? Cadastre-se
+          Não tem uma conta? Crie uma conta
         </Text>
       </TouchableOpacity>
     </View>
