@@ -50,12 +50,12 @@ const RegisterScreen = ({ navigation, onRegister }) => {
       Animated.sequence([
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 300,
+          duration: 350,
           useNativeDriver: true,
         }),
         Animated.timing(tutorialFade, {
           toValue: 1,
-          duration: 300,
+          duration: 350,
           useNativeDriver: true,
         }),
       ]).start(() => {
@@ -90,7 +90,7 @@ const RegisterScreen = ({ navigation, onRegister }) => {
         }
       ]}
     >
-      <Text style={[styles.title, { color: theme.text }]}>Cadastro</Text>
+      <Text style={[styles.title, { color: theme.text }]}>Criar uma conta</Text>
       
       <TextInput
         style={[styles.input, { 
@@ -140,7 +140,7 @@ const RegisterScreen = ({ navigation, onRegister }) => {
             trackColor={{ false: theme.border, true: theme.primary }}
             thumbColor={theme.card}
           />
-          <Text style={[styles.optionText, { color: theme.text }]}>Lembrar-me</Text>
+          <Text style={[styles.optionText, { color: theme.text }]}>Matanhe-me conectado</Text>
         </View>
 
         <View style={styles.optionRow}>
@@ -158,7 +158,7 @@ const RegisterScreen = ({ navigation, onRegister }) => {
         style={[styles.button, { backgroundColor: theme.primary }]}
         onPress={handleRegister}
       >
-        <Text style={[styles.buttonText, { color: theme.white }]}>Cadastrar</Text>
+        <Text style={[styles.buttonText, { color: theme.white }]}>Criar conta</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   },
   input: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 20, // alterado de 8 para 20 para email, usuario e senha
     marginBottom: 15,
     borderWidth: 1,
     fontSize: 16,
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 20,
     alignItems: 'center',
     marginBottom: 15,
   },

@@ -56,7 +56,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: '#FFFFFF', // ADICIONAR TAREFA
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -67,7 +67,7 @@ export default StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#FF3B30',
+    backgroundColor: '#0A84FF', // Lixeira
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5,
@@ -81,7 +81,7 @@ export default StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // background da lixeira
     justifyContent: 'center',
     alignItems: 'center',
   },

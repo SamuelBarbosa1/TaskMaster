@@ -41,7 +41,7 @@ const TaskItem = ({ task, onToggleComplete, onEdit }) => {
               styles.editInput,
               {
                 backgroundColor: theme.background,
-                color: theme.text.primary
+                color: theme.text.ca
               }
             ]}
             value={editedText}

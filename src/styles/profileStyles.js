@@ -15,25 +15,25 @@ export default StyleSheet.create({
   },
   imageContainer: {
     position: 'relative',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   profileImage: {
     width: 120,
     height: 120,
-    borderRadius: 60,
+    borderRadius: 60, // Imagem de perfil
   },
   placeholderImage: {
     width: 120,
     height: 120,
-    borderRadius: 60,
-    justifyContent: 'center',
+    borderRadius: 60, 
+    justifyContent: 'center', 
     alignItems: 'center',
   },
   editIconContainer: {
     position: 'absolute',
     right: 0,
     bottom: 0,
-    borderRadius: 20,
+    borderRadius: 20, //Botão de editar
     padding: 10,
     elevation: 5,
   },
@@ -48,9 +48,9 @@ export default StyleSheet.create({
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 20,
-    marginHorizontal: 20,
-    borderRadius: 15,
+    padding: 18,
+    marginHorizontal: 20, // Estatísticas
+    borderRadius: 20, // altera de 15 para 20
     elevation: 2,
     marginBottom: 20,
   },
@@ -59,7 +59,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   statNumber: {
-    fontSize: 24,
+    fontSize: 24, // Número de estatísticas
     fontWeight: 'bold',
     marginTop: 5,
   },
@@ -70,7 +70,7 @@ export default StyleSheet.create({
   section: {
     margin: 20,
     padding: 20,
-    borderRadius: 15,
+    borderRadius: 20, // alterado de 10 para 20
     elevation: 2,
   },
   sectionTitle: {
@@ -83,14 +83,15 @@ export default StyleSheet.create({
   },
   bioInput: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 20, // alterado de 8 para 20
+    borderWidth: 1,
     minHeight: 100,
     textAlignVertical: 'top',
     fontSize: 16,
   },
   bioSaveButton: {
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 20, // alterado de 8 para 20
     alignItems: 'center',
     marginTop: 10,
   },
@@ -124,10 +125,13 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 15,
+    paddingVertical: 12, // Diminui a altura
+    paddingHorizontal: 20, // Diminui a largura
     borderRadius: 12,
     marginBottom: 15,
     elevation: 2,
+    alignSelf: 'center', // Mantém alinhado ao centro
+    width: '80%', // Ajusta para deixar menor (mude o valor se quiser mais pequeno)
   },
   actionButtonText: {
     fontWeight: 'bold',

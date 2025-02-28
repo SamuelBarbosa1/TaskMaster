@@ -95,7 +95,7 @@ const OnboardingTutorial = ({ onComplete }) => {
           ]}
         >
           <View style={[styles.iconContainer, { backgroundColor: theme.card }]}>
-            <Icon name={item.icon} size={60} color={theme.primary} />
+            <Icon name={item.icon} size={80} color={theme.primary} />
           </View>
           <View style={styles.textContainer}>
             <Text style={[styles.title, { color: theme.text }]}>
@@ -113,7 +113,7 @@ const OnboardingTutorial = ({ onComplete }) => {
   const finishTutorial = () => {
     Animated.timing(fadeOut, {
       toValue: 0,
-      duration: 200,
+      duration: 300,
       useNativeDriver: true,
     }).start(() => {
       onComplete();
