@@ -65,14 +65,16 @@ const styles = StyleSheet.create({
   rightAction: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 64,
-    height: '100%',
+    width: 50, // Largura menor
+    height: 50, // Altura menor
+    borderRadius: 25, // Ajustar para manter o formato circular
+    marginHorizontal: 5, // Manter espaçamento sem mudar a posição
   },
   actionIcon: {
-    width: 30,
-    marginHorizontal: 10,
+    width: 24, // Ícone menor
+    height: 24,
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-
 export default SwipeableTaskItem; 

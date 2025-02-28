@@ -317,7 +317,7 @@ const TaskScreen = ({ route }) => {
         style={styles.floatingButton}
         onPress={showDeleteModal}
       >
-        <Icon name="delete" size={24} color="white" />
+        <Icon name="delete" size={25} color="white" />
       </TouchableOpacity>
 
       <Modal
