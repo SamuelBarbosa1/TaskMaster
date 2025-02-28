@@ -62,7 +62,7 @@ const AchievementItem = ({ achievement, isUnlocked, theme }) => {
 
       Animated.timing(opacityAnim, {
         toValue: 1,
-        duration: 300,
+        duration: 350,
         useNativeDriver: true,
       }).start();
     }
@@ -101,7 +101,7 @@ const AchievementItem = ({ achievement, isUnlocked, theme }) => {
       >
         <Icon
           name={achievement.icon}
-          size={32}
+          size={55}
           color={isUnlocked ? theme.white : theme.textSecondary}
           style={styles.achievementIcon}
         />
@@ -131,7 +131,7 @@ const Achievements = ({ stats }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={[styles.title, { color: theme.text }]}>Conquistas</Text>
+      <Text style={[styles.title, { color: theme.text }]}>Suas conquistas</Text>
       <View style={styles.achievementsContainer}>
         {achievements.map((achievement) => (
           <AchievementItem
@@ -165,11 +165,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   achievementWrapper: {
-    width: '48%',
+    width: '47%',
     marginBottom: 16,
   },
   achievement: {
-    borderRadius: 16,
+    borderRadius: 20,
     padding: 16,
     alignItems: 'center',
     justifyContent: 'center',

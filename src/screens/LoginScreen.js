@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation, onLogin }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={[styles.title, { color: theme.text }]}>Login</Text>
+      <Text style={[styles.title, { color: theme.text }]}>Entrar</Text>
       
       <TextInput
         style={[styles.input, { 
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   input: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 20, // Alterado de 8 para 20 colocar email e senha
     marginBottom: 15,
     borderWidth: 1,
     fontSize: 16,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 20, // Alterado de 8 para 20 botão de entrar
     alignItems: 'center',
     marginBottom: 15,
   },

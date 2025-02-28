@@ -50,12 +50,12 @@ const RegisterScreen = ({ navigation, onRegister }) => {
       Animated.sequence([
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 300,
+          duration: 350,
           useNativeDriver: true,
         }),
         Animated.timing(tutorialFade, {
           toValue: 1,
-          duration: 300,
+          duration: 350,
           useNativeDriver: true,
         }),
       ]).start(() => {
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   },
   input: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 20, // alterado de 8 para 20 para email, usuario e senha
     marginBottom: 15,
     borderWidth: 1,
     fontSize: 16,
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 20,
     alignItems: 'center',
     marginBottom: 15,
   },

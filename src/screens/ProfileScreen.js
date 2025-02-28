@@ -167,7 +167,7 @@ const ProfileScreen = ({ route }) => {
   };
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: theme.background }]}>
+    <ScrollView style={[styles.container, { backgroundColor: theme.background }]}> 
       <View style={[styles.header, { backgroundColor: theme.card }]}>
         <TouchableOpacity style={styles.imageContainer} onPress={pickImage}>
           {profileImage ? (
@@ -242,7 +242,7 @@ const ProfileScreen = ({ route }) => {
 
       <View style={styles.actionButtons}>
         <TouchableOpacity 
-          style={[styles.actionButton, { backgroundColor: theme.secondary }]}
+          style={[styles.actionButton, { backgroundColor: theme.textSecondary }]}
           onPress={handleClearCache}
         >
           <Icon name="delete-sweep" size={24} color={theme.white} />

@@ -113,7 +113,7 @@ const OnboardingTutorial = ({ onComplete }) => {
   const finishTutorial = () => {
     Animated.timing(fadeOut, {
       toValue: 0,
-      duration: 200,
+      duration: 300,
       useNativeDriver: true,
     }).start(() => {
       onComplete();
