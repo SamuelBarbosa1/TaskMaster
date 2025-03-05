@@ -24,7 +24,7 @@ import ConnectionStatus from '../components/ConnectionStatus';
 const saveToHistory = async (task, action) => {
   try {
     const history = await loadData('taskHistory') || {};
-    const date = new Date(task.createdAt).toISOString().split('T')[0];
+    const date = new Date().toLocaleDateString('pt-BR').split('/').reverse().join('-'); // Ajusta para o horário local
     
     if (!history[date]) {
       history[date] = [];
@@ -34,14 +34,12 @@ const saveToHistory = async (task, action) => {
     const existingTaskIndex = history[date].findIndex(t => t.id === task.id);
     
     if (existingTaskIndex >= 0) {
-      // Atualiza a tarefa existente
       history[date][existingTaskIndex] = {
         ...task,
         [action]: true,
         updatedAt: new Date().toISOString()
       };
     } else {
-      // Adiciona nova tarefa ao histórico
       history[date].push({
         ...task,
         [action]: true,
